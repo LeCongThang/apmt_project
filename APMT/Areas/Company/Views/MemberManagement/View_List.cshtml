@@ -1,0 +1,111 @@
+﻿@using APMT.Areas.Company.Models;
+@model userCompany
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
+    var lst = (List<userCompany>)ViewBag.List;
+    int i = 0;
+
+}
+<section class="content-header">
+    <h1>
+        Member List
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Member Management</li>
+    </ol>
+</section>
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12">
+            @Html.Partial("Add_New")
+            <p style="color: red;">@ViewBag.Message</p>
+            <div class="box box-info">
+                <hr />
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </div>
+                        </form>
+                        <br />
+                    </div>
+                    <br />
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                @Html.HiddenFor(x => x.id);
+                                <th><center>No.</center></th>
+                                <th class="col-lg-2"><center>Full Name</center></th>
+                                <th class="col-lg-1"><center>Avatar</center></th>
+                                <th class="col-lg-3"><center>Email </center></th>
+                                <th class="col-lg-2"><center>CreateDate </center></th>
+                                <th colspan="2"><center>Action</center></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in lst)
+                            {
+
+                                i++;
+                                <tr>
+                                    @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
+                                    <td><center>@i</center></td>
+                                    <td>
+                                        <center> @item.fullName</center>
+                                    </td>
+                                    <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
+                                    <td><center>@item.email</center></td>
+                                    <td><center>@item.createAt</center></td>
+                                    @if (@item.isAllowed == true)
+                                    {
+                                        <td>
+                                            <center>
+                                                <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Creator</a><br />
+                                                <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                @*<a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />*@
+                                                <a href="/controller/deleteMember/" +@item.id />Delete
+                                            </center>
+                                        </td>
+
+                                    }
+                                    @*else
+                                        {
+                                            <td>
+                                                <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Enable</a><br />
+                                            </td>
+                                        }*@
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                    <div class="col-sm-5 col-lg-5">
+                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                            Showing 1 to 5 of 57 entries
+                        </div>
+
+                    </div>
+                    <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
+
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+

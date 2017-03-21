@@ -200,8 +200,10 @@
     <Compile Include="Areas\Company\Controllers\AccountController.cs" />
     <Compile Include="Areas\Company\Controllers\DefineProcessController.cs" />
     <Compile Include="Areas\Company\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Company\Controllers\MemberManagementController.cs" />
     <Compile Include="Areas\Company\Models\AuthorizeController.cs" />
     <Compile Include="Areas\Company\Models\ReflectionController.cs" />
+    <Compile Include="Areas\Company\Models\userCompany.cs" />
     <Compile Include="Areas\System\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -265,11 +267,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Company\Views\web.config" />
-    <Content Include="Areas\Company\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Company\Views\Shared\_Client_LayoutPage.cshtml" />
     <Content Include="Areas\Company\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Company\Views\Shared\ConfigPartial.cshtml" />
-    <Content Include="Areas\Company\Views\Shared\HeaderPartial.cshtml" />
-    <Content Include="Areas\Company\Views\Shared\MenuPartial.cshtml" />
+    <Content Include="Areas\Company\Views\Shared\Partial\_Client_ConfigPartial.cshtml" />
+    <Content Include="Areas\Company\Views\Shared\Partial\_Client_HeaderPartial.cshtml" />
+    <Content Include="Areas\Company\Views\Shared\Partial\_Client_MenuPartial.cshtml" />
     <Content Include="Areas\Company\Views\Shared\_Layout.cshtml" />
     <Content Include="Images\common\flag_en.jpg" />
     <Content Include="Images\common\flag_vn.jpg" />
@@ -348,12 +350,18 @@
     <Content Include="Areas\Company\Views\DefineProcess\Define.cshtml" />
     <Content Include="Areas\Company\Views\Activity\List_Creator.cshtml" />
     <Content Include="Areas\Company\Views\DefineProcess\ManageRole.cshtml" />
+    <Content Include="Areas\Company\Views\MemberManagement\View_List.cshtml" />
+    <Content Include="Areas\Company\Views\MemberManagement\Add_New.cshtml" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\D.o.T - Pham Ngoc Duy\PhanQuyen\StaticResource\StaticResource.csproj">
       <Project>{35ead44c-31ea-4832-9890-51f0b071be5c}</Project>
       <Name>StaticResource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{0583b270-df0e-4872-aa08-46884946e473}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

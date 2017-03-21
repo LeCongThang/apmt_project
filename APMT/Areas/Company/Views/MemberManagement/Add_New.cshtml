@@ -1,0 +1,24 @@
+﻿@using Models;
+@model APMT_User
+@{
+    Layout = null;
+}
+<button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#AddNew">Add New</button>
+<div id="AddNew" class="box collapse">
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" action="~/Company/MemberManagement/Add_New/" method="post">
+        <div class="box-body">
+
+            <div class="form-group">
+                <label for="exampleInputFile">Email</label>
+                <input class="form-control" type="text" id="somevalue" name="somevalue" data-autocomplete-url="autocomplete" />
+            </div>
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary btn-md">Add</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,122 @@
+﻿<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="~/Content/Images/Avatar_ProductAD.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>Administrator</p>
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            @*@*System*@
+            @*<li class="active treeview">
+                    <a href="#">
+                        <i class="fa fa-user"></i> <span>System</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/System/CompanyManagement/View_List"><i class="fa fa-circle-o"></i>Company Management</a></li>
+                        <li><a href="/System/UserManagement/View_List"><i class="fa fa-circle-o"></i>User Management</a></li>
+
+                    </ul>
+                </li>*@
+            @*Client*@
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i> <span>Client</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/Company/MemberManagement/View_List"><i class="fa fa-circle-o"></i>Members Management</a></li>
+                    <li><a href="/Company/ProjectManagement/View_List"><i class="fa fa-circle-o"></i>Project Management</a></li>
+                    <li><a href="/Company/ProcessManagement/ListProcess"><i class="fa fa-circle-o"></i>Process Management</a></li>
+                    <li><a href="/Company/InstanceManagement/Index"><i class="fa fa-circle-o"></i>Instance Management</a></li>
+
+                </ul>
+            </li>
+            @*    <li class="active treeview">
+                    <a href="@Url.Action("View_List","AdministratorManagement",new {Area="Company" })">
+                        <i class="fa fa-user"></i> <span>Client</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+
+                </li>
+                <li class="treeview">
+                    <a href="@Url.Action("View_List","CompanyManagement",new {Area="System" })">
+                        <i class="fa fa-dashboard"></i> <span>Company Management</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="@Url.Action("View_List","UserManagement",new {Area="System" })">
+                        <i class="fa fa-user"></i>
+                        <span>User Management</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>*@
+            @*<li class="active treeview">
+                    <a href="@Url.Action("UpdateInformation","ManageCompanyInfo")">
+                        <i class="fa fa-dashboard"></i> <span>Manage Company Info</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>*@
+            @*<li class="treeview">
+                    <a href="@Url.Action("Index","ManageCreator")">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>Creator Management</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Index","ManageCreator")"><i class="fa fa-circle-o"></i>Creator List</a></li>
+                            <li><a href="@Url.Action("AddNew","ManageCreator")"><i class="fa fa-circle-o"></i> Add New</a></li>
+                        </ul>
+                </li>*@
+
+
+            @*<li class="treeview">
+                    <a href="@Url.Action("ListProcess","ManageProcess")">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>Manage Process</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>*@
+
+
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
