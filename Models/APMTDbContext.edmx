@@ -1,0 +1,815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CP_SPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APMT_Action">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="ControllerName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="APMT_Activity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Process_Id" Type="int" />
+          <Property Name="Weigth" Type="int" />
+          <Property Name="Type" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="APMT_Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Admin_id" Type="int" />
+          <Property Name="Allowed" Type="bit" />
+          <Property Name="Register_at" Type="date" />
+          <Property Name="Update_at" Type="date" />
+        </EntityType>
+        <EntityType Name="APMT_Company_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company_id" Type="int" />
+          <Property Name="User_id" Type="int" />
+        </EntityType>
+        <EntityType Name="APMT_Controller">
+          <Key>
+            <PropertyRef Name="ControllerName" />
+          </Key>
+          <Property Name="ControllerName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="APMT_Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APMT_Permission">
+          <Key>
+            <PropertyRef Name="ActionId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ActionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="APMT_Process">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="JsonContent" Type="varchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Creator_Id" Type="int" />
+          <Property Name="Allowed" Type="bit" />
+        </EntityType>
+        <EntityType Name="APMT_Process_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Process_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="APMT_ProductAdmin">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="64" />
+          <Property Name="Password" Type="nvarchar" MaxLength="256" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="64" />
+          <Property Name="Email" Type="varchar" MaxLength="256" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
+          <Property Name="isAdmin" Type="int" />
+          <Property Name="Allowed" Type="int" />
+        </EntityType>
+        <EntityType Name="APMT_Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Manager_Id" Type="int" />
+          <Property Name="Company_Id" Type="int" />
+          <Property Name="Allowed" Type="bit" />
+        </EntityType>
+        <EntityType Name="APMT_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="64" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
+          <Property Name="Allowed" Type="bit" />
+          <Property Name="Create_at" Type="date" />
+          <Property Name="Update_at" Type="date" />
+        </EntityType>
+        <Association Name="FK_APMT_Action_APMT_Controller">
+          <End Role="APMT_Controller" Type="Self.APMT_Controller" Multiplicity="0..1" />
+          <End Role="APMT_Action" Type="Self.APMT_Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Controller">
+              <PropertyRef Name="ControllerName" />
+            </Principal>
+            <Dependent Role="APMT_Action">
+              <PropertyRef Name="ControllerName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Activity_APMT_Process">
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="0..1" />
+          <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity">
+              <PropertyRef Name="Process_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Company_APMT_User">
+          <End Role="APMT_User" Type="Self.APMT_User" Multiplicity="0..1" />
+          <End Role="APMT_Company" Type="Self.APMT_Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Company">
+              <PropertyRef Name="Admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Company_User_APMT_Company">
+          <End Role="APMT_Company" Type="Self.APMT_Company" Multiplicity="0..1" />
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Company_User">
+              <PropertyRef Name="Company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Company_User_APMT_User">
+          <End Role="APMT_User" Type="Self.APMT_User" Multiplicity="0..1" />
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Company_User">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Permission_APMT_Action">
+          <End Role="APMT_Action" Type="Self.APMT_Action" Multiplicity="1" />
+          <End Role="APMT_Permission" Type="Self.APMT_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Action">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Permission">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Permission_APMT_ProductAdmin">
+          <End Role="APMT_ProductAdmin" Type="Self.APMT_ProductAdmin" Multiplicity="1" />
+          <End Role="APMT_Permission" Type="Self.APMT_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_ProductAdmin">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="APMT_Permission">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Process_APMT_Company_User">
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="0..1" />
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Process">
+              <PropertyRef Name="Creator_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Process_Role_APMT_Process">
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="0..1" />
+          <End Role="APMT_Process_Role" Type="Self.APMT_Process_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Process_Role">
+              <PropertyRef Name="Process_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Project_APMT_Company">
+          <End Role="APMT_Company" Type="Self.APMT_Company" Multiplicity="0..1" />
+          <End Role="APMT_Project" Type="Self.APMT_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Project">
+              <PropertyRef Name="Company_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Project_APMT_Company_User">
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="0..1" />
+          <End Role="APMT_Project" Type="Self.APMT_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Project">
+              <PropertyRef Name="Manager_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CP_SPMModelStoreContainer">
+          <EntitySet Name="APMT_Action" EntityType="Self.APMT_Action" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Activity" EntityType="Self.APMT_Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Company" EntityType="Self.APMT_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Company_User" EntityType="Self.APMT_Company_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Controller" EntityType="Self.APMT_Controller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Language" EntityType="Self.APMT_Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Permission" EntityType="Self.APMT_Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Process" EntityType="Self.APMT_Process" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Process_Role" EntityType="Self.APMT_Process_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_ProductAdmin" EntityType="Self.APMT_ProductAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Project" EntityType="Self.APMT_Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_User" EntityType="Self.APMT_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_APMT_Action_APMT_Controller" Association="Self.FK_APMT_Action_APMT_Controller">
+            <End Role="APMT_Controller" EntitySet="APMT_Controller" />
+            <End Role="APMT_Action" EntitySet="APMT_Action" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_APMT_Process" Association="Self.FK_APMT_Activity_APMT_Process">
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Company_APMT_User" Association="Self.FK_APMT_Company_APMT_User">
+            <End Role="APMT_User" EntitySet="APMT_User" />
+            <End Role="APMT_Company" EntitySet="APMT_Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Company_User_APMT_Company" Association="Self.FK_APMT_Company_User_APMT_Company">
+            <End Role="APMT_Company" EntitySet="APMT_Company" />
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Company_User_APMT_User" Association="Self.FK_APMT_Company_User_APMT_User">
+            <End Role="APMT_User" EntitySet="APMT_User" />
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Permission_APMT_Action" Association="Self.FK_APMT_Permission_APMT_Action">
+            <End Role="APMT_Action" EntitySet="APMT_Action" />
+            <End Role="APMT_Permission" EntitySet="APMT_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Permission_APMT_ProductAdmin" Association="Self.FK_APMT_Permission_APMT_ProductAdmin">
+            <End Role="APMT_ProductAdmin" EntitySet="APMT_ProductAdmin" />
+            <End Role="APMT_Permission" EntitySet="APMT_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Process_APMT_Company_User" Association="Self.FK_APMT_Process_APMT_Company_User">
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Process_Role_APMT_Process" Association="Self.FK_APMT_Process_Role_APMT_Process">
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+            <End Role="APMT_Process_Role" EntitySet="APMT_Process_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Project_APMT_Company" Association="Self.FK_APMT_Project_APMT_Company">
+            <End Role="APMT_Company" EntitySet="APMT_Company" />
+            <End Role="APMT_Project" EntitySet="APMT_Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Project_APMT_Company_User" Association="Self.FK_APMT_Project_APMT_Company_User">
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+            <End Role="APMT_Project" EntitySet="APMT_Project" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CP_SPMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="APMT_Action">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ControllerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APMT_Controller" Relationship="Self.FK_APMT_Action_APMT_Controller" FromRole="APMT_Action" ToRole="APMT_Controller" />
+          <NavigationProperty Name="APMT_Permission" Relationship="Self.FK_APMT_Permission_APMT_Action" FromRole="APMT_Action" ToRole="APMT_Permission" />
+        </EntityType>
+        <EntityType Name="APMT_Activity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Process_Id" Type="Int32" />
+          <Property Name="Weigth" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APMT_Process" Relationship="Self.FK_APMT_Activity_APMT_Process" FromRole="APMT_Activity" ToRole="APMT_Process" />
+        </EntityType>
+        <EntityType Name="APMT_Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_id" Type="Int32" />
+          <Property Name="Allowed" Type="Boolean" />
+          <Property Name="Register_at" Type="DateTime" Precision="0" />
+          <Property Name="Update_at" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="APMT_User" Relationship="Self.FK_APMT_Company_APMT_User" FromRole="APMT_Company" ToRole="APMT_User" />
+          <NavigationProperty Name="APMT_Company_User" Relationship="Self.FK_APMT_Company_User_APMT_Company" FromRole="APMT_Company" ToRole="APMT_Company_User" />
+          <NavigationProperty Name="APMT_Project" Relationship="Self.FK_APMT_Project_APMT_Company" FromRole="APMT_Company" ToRole="APMT_Project" />
+        </EntityType>
+        <EntityType Name="APMT_Company_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_id" Type="Int32" />
+          <Property Name="User_id" Type="Int32" />
+          <NavigationProperty Name="APMT_Company" Relationship="Self.FK_APMT_Company_User_APMT_Company" FromRole="APMT_Company_User" ToRole="APMT_Company" />
+          <NavigationProperty Name="APMT_User" Relationship="Self.FK_APMT_Company_User_APMT_User" FromRole="APMT_Company_User" ToRole="APMT_User" />
+          <NavigationProperty Name="APMT_Process" Relationship="Self.FK_APMT_Process_APMT_Company_User" FromRole="APMT_Company_User" ToRole="APMT_Process" />
+          <NavigationProperty Name="APMT_Project" Relationship="Self.FK_APMT_Project_APMT_Company_User" FromRole="APMT_Company_User" ToRole="APMT_Project" />
+        </EntityType>
+        <EntityType Name="APMT_Controller">
+          <Key>
+            <PropertyRef Name="ControllerName" />
+          </Key>
+          <Property Name="ControllerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="APMT_Action" Relationship="Self.FK_APMT_Action_APMT_Controller" FromRole="APMT_Controller" ToRole="APMT_Action" />
+        </EntityType>
+        <EntityType Name="APMT_Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APMT_Permission">
+          <Key>
+            <PropertyRef Name="ActionId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="APMT_Action" Relationship="Self.FK_APMT_Permission_APMT_Action" FromRole="APMT_Permission" ToRole="APMT_Action" />
+          <NavigationProperty Name="APMT_ProductAdmin" Relationship="Self.FK_APMT_Permission_APMT_ProductAdmin" FromRole="APMT_Permission" ToRole="APMT_ProductAdmin" />
+        </EntityType>
+        <EntityType Name="APMT_Process">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="JsonContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Creator_Id" Type="Int32" />
+          <Property Name="Allowed" Type="Boolean" />
+          <NavigationProperty Name="APMT_Activity" Relationship="Self.FK_APMT_Activity_APMT_Process" FromRole="APMT_Process" ToRole="APMT_Activity" />
+          <NavigationProperty Name="APMT_Company_User" Relationship="Self.FK_APMT_Process_APMT_Company_User" FromRole="APMT_Process" ToRole="APMT_Company_User" />
+          <NavigationProperty Name="APMT_Process_Role" Relationship="Self.FK_APMT_Process_Role_APMT_Process" FromRole="APMT_Process" ToRole="APMT_Process_Role" />
+        </EntityType>
+        <EntityType Name="APMT_Process_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Process_Id" Type="Int32" />
+          <NavigationProperty Name="APMT_Process" Relationship="Self.FK_APMT_Process_Role_APMT_Process" FromRole="APMT_Process_Role" ToRole="APMT_Process" />
+        </EntityType>
+        <EntityType Name="APMT_ProductAdmin">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isAdmin" Type="Int32" />
+          <Property Name="Allowed" Type="Int32" />
+          <NavigationProperty Name="APMT_Permission" Relationship="Self.FK_APMT_Permission_APMT_ProductAdmin" FromRole="APMT_ProductAdmin" ToRole="APMT_Permission" />
+        </EntityType>
+        <EntityType Name="APMT_Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Manager_Id" Type="Int32" />
+          <Property Name="Company_Id" Type="Int32" />
+          <Property Name="Allowed" Type="Boolean" />
+          <NavigationProperty Name="APMT_Company" Relationship="Self.FK_APMT_Project_APMT_Company" FromRole="APMT_Project" ToRole="APMT_Company" />
+          <NavigationProperty Name="APMT_Company_User" Relationship="Self.FK_APMT_Project_APMT_Company_User" FromRole="APMT_Project" ToRole="APMT_Company_User" />
+        </EntityType>
+        <EntityType Name="APMT_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Allowed" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="0" />
+          <Property Name="Update_at" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="APMT_Company" Relationship="Self.FK_APMT_Company_APMT_User" FromRole="APMT_User" ToRole="APMT_Company" />
+          <NavigationProperty Name="APMT_Company_User" Relationship="Self.FK_APMT_Company_User_APMT_User" FromRole="APMT_User" ToRole="APMT_Company_User" />
+        </EntityType>
+        <Association Name="FK_APMT_Action_APMT_Controller">
+          <End Role="APMT_Controller" Type="Self.APMT_Controller" Multiplicity="0..1" />
+          <End Role="APMT_Action" Type="Self.APMT_Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Controller">
+              <PropertyRef Name="ControllerName" />
+            </Principal>
+            <Dependent Role="APMT_Action">
+              <PropertyRef Name="ControllerName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Permission_APMT_Action">
+          <End Role="APMT_Action" Type="Self.APMT_Action" Multiplicity="1" />
+          <End Role="APMT_Permission" Type="Self.APMT_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Action">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Permission">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Activity_APMT_Process">
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="0..1" />
+          <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity">
+              <PropertyRef Name="Process_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Company_APMT_User">
+          <End Role="APMT_User" Type="Self.APMT_User" Multiplicity="0..1" />
+          <End Role="APMT_Company" Type="Self.APMT_Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Company">
+              <PropertyRef Name="Admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Company_User_APMT_Company">
+          <End Role="APMT_Company" Type="Self.APMT_Company" Multiplicity="0..1" />
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Company_User">
+              <PropertyRef Name="Company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Project_APMT_Company">
+          <End Role="APMT_Company" Type="Self.APMT_Company" Multiplicity="0..1" />
+          <End Role="APMT_Project" Type="Self.APMT_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Project">
+              <PropertyRef Name="Company_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Company_User_APMT_User">
+          <End Role="APMT_User" Type="Self.APMT_User" Multiplicity="0..1" />
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Company_User">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Process_APMT_Company_User">
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="0..1" />
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Process">
+              <PropertyRef Name="Creator_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Project_APMT_Company_User">
+          <End Role="APMT_Company_User" Type="Self.APMT_Company_User" Multiplicity="0..1" />
+          <End Role="APMT_Project" Type="Self.APMT_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Company_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Project">
+              <PropertyRef Name="Manager_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Permission_APMT_ProductAdmin">
+          <End Role="APMT_ProductAdmin" Type="Self.APMT_ProductAdmin" Multiplicity="1" />
+          <End Role="APMT_Permission" Type="Self.APMT_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_ProductAdmin">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="APMT_Permission">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Process_Role_APMT_Process">
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="0..1" />
+          <End Role="APMT_Process_Role" Type="Self.APMT_Process_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Process_Role">
+              <PropertyRef Name="Process_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CP_SPMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APMT_Action" EntityType="Self.APMT_Action" />
+          <EntitySet Name="APMT_Activity" EntityType="Self.APMT_Activity" />
+          <EntitySet Name="APMT_Company" EntityType="Self.APMT_Company" />
+          <EntitySet Name="APMT_Company_User" EntityType="Self.APMT_Company_User" />
+          <EntitySet Name="APMT_Controller" EntityType="Self.APMT_Controller" />
+          <EntitySet Name="APMT_Language" EntityType="Self.APMT_Language" />
+          <EntitySet Name="APMT_Permission" EntityType="Self.APMT_Permission" />
+          <EntitySet Name="APMT_Process" EntityType="Self.APMT_Process" />
+          <EntitySet Name="APMT_Process_Role" EntityType="Self.APMT_Process_Role" />
+          <EntitySet Name="APMT_ProductAdmin" EntityType="Self.APMT_ProductAdmin" />
+          <EntitySet Name="APMT_Project" EntityType="Self.APMT_Project" />
+          <EntitySet Name="APMT_User" EntityType="Self.APMT_User" />
+          <AssociationSet Name="FK_APMT_Action_APMT_Controller" Association="Self.FK_APMT_Action_APMT_Controller">
+            <End Role="APMT_Controller" EntitySet="APMT_Controller" />
+            <End Role="APMT_Action" EntitySet="APMT_Action" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Permission_APMT_Action" Association="Self.FK_APMT_Permission_APMT_Action">
+            <End Role="APMT_Action" EntitySet="APMT_Action" />
+            <End Role="APMT_Permission" EntitySet="APMT_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_APMT_Process" Association="Self.FK_APMT_Activity_APMT_Process">
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Company_APMT_User" Association="Self.FK_APMT_Company_APMT_User">
+            <End Role="APMT_User" EntitySet="APMT_User" />
+            <End Role="APMT_Company" EntitySet="APMT_Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Company_User_APMT_Company" Association="Self.FK_APMT_Company_User_APMT_Company">
+            <End Role="APMT_Company" EntitySet="APMT_Company" />
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Project_APMT_Company" Association="Self.FK_APMT_Project_APMT_Company">
+            <End Role="APMT_Company" EntitySet="APMT_Company" />
+            <End Role="APMT_Project" EntitySet="APMT_Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Company_User_APMT_User" Association="Self.FK_APMT_Company_User_APMT_User">
+            <End Role="APMT_User" EntitySet="APMT_User" />
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Process_APMT_Company_User" Association="Self.FK_APMT_Process_APMT_Company_User">
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Project_APMT_Company_User" Association="Self.FK_APMT_Project_APMT_Company_User">
+            <End Role="APMT_Company_User" EntitySet="APMT_Company_User" />
+            <End Role="APMT_Project" EntitySet="APMT_Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Permission_APMT_ProductAdmin" Association="Self.FK_APMT_Permission_APMT_ProductAdmin">
+            <End Role="APMT_ProductAdmin" EntitySet="APMT_ProductAdmin" />
+            <End Role="APMT_Permission" EntitySet="APMT_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Process_Role_APMT_Process" Association="Self.FK_APMT_Process_Role_APMT_Process">
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+            <End Role="APMT_Process_Role" EntitySet="APMT_Process_Role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CP_SPMModelStoreContainer" CdmEntityContainer="CP_SPMEntities">
+          <EntitySetMapping Name="APMT_Action">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Action">
+              <MappingFragment StoreEntitySet="APMT_Action">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Activity">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Activity">
+              <MappingFragment StoreEntitySet="APMT_Activity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Process_Id" ColumnName="Process_Id" />
+                <ScalarProperty Name="Weigth" ColumnName="Weigth" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Company">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Company">
+              <MappingFragment StoreEntitySet="APMT_Company">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+                <ScalarProperty Name="Register_at" ColumnName="Register_at" />
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Company_User">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Company_User">
+              <MappingFragment StoreEntitySet="APMT_Company_User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Company_id" ColumnName="Company_id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Controller">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Controller">
+              <MappingFragment StoreEntitySet="APMT_Controller">
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Language">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Language">
+              <MappingFragment StoreEntitySet="APMT_Language">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Permission">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Permission">
+              <MappingFragment StoreEntitySet="APMT_Permission">
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Process">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Process">
+              <MappingFragment StoreEntitySet="APMT_Process">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JsonContent" ColumnName="JsonContent" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Creator_Id" ColumnName="Creator_Id" />
+                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Process_Role">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Process_Role">
+              <MappingFragment StoreEntitySet="APMT_Process_Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Process_Id" ColumnName="Process_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_ProductAdmin">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_ProductAdmin">
+              <MappingFragment StoreEntitySet="APMT_ProductAdmin">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Project">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Project">
+              <MappingFragment StoreEntitySet="APMT_Project">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Manager_Id" ColumnName="Manager_Id" />
+                <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_User">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_User">
+              <MappingFragment StoreEntitySet="APMT_User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Allowed" ColumnName="Allowed" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

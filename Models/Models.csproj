@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0583B270-DF0E-4872-AA08-46884946E473}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Models</RootNamespace>
+    <AssemblyName>Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APMTDbContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APMTDbContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMTDbContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMTDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>APMTDbContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Action.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Activity.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Company.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Company_User.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Controller.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Language.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Permission.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Process.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Process_Role.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_ProductAdmin.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Project.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_User.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="APMTDbContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>APMTDbContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="APMTDbContext.edmx.diagram">
+      <DependentUpon>APMTDbContext.edmx</DependentUpon>
+    </None>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="APMTDbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>APMTDbContext.edmx</DependentUpon>
+      <LastGenOutput>APMTDbContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="APMTDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>APMTDbContext.edmx</DependentUpon>
+      <LastGenOutput>APMTDbContext.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

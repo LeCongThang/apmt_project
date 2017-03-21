@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Define process";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Define Process</title>
+    <meta name="description" content="APMT Define process, define work flow, make process" />
+    <meta charset="UTF-8">
+    <script src="~/Scripts/go.js"></script>
+    <script src="~/Scripts/definepro.js"></script>
+    <link href="~/Content/css/definepro.css" rel="stylesheet" />
+</head>
+<body onload="init()">
+
+    <div id="sample">
+        <div class="sam">
+            <span style="display: inline-block; vertical-align: top;width:20%;">
+                <div id="myPaletteDiv"></div>
+            </span>
+
+            <span style="display: inline-block; vertical-align: top;width:79.7%;">
+                <div id="myDiagramDiv"></div>
+            </span>
+        </div>
+
+        <div>
+            <div>
+                <button id="SaveButton" class="btn btn-success" data-toggle="modal" data-target="#myModal">Save</button>
+                <a href="/company/activity-config" class="btn btn-success">Activity config</a>
+                @*<button onclick="load()">Load</button>*@
+                @*<button onclick="makeSVG()" class="btn btn-success">Preview Process Image</button>
+                    <div id="SVGArea"></div>*@
+
+            </div>
+            <textarea id="mySavedModel">
+                { "class": "go.GraphLinksModel",
+                "linkFromPortIdProperty": "fromPort",
+                "linkToPortIdProperty": "toPort",
+                "nodeDataArray": [
+                ],
+                "linkDataArray": [
+                ]}
+            </textarea>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Save</h4>
+                </div>
+                <form role="form" method="post" action="">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputFile">Process name:</label>
+                            <input type="text" class="form-control pull-right" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Process Descriptons:</label>
+                            <textarea class="form-control pull-right" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" onclick="save()" class="btn btn-primary" data-dismiss="modal">OK</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

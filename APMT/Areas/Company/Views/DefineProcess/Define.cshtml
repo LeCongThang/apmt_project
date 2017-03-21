@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Define";
+    Layout = "~/Areas/Company/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Process Informations</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" method="post" action="">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Process name:</label>
+                            <input type="text" class="form-control pull-right" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Process descriptions:</label>
+                            <input type="text" class="form-control pull-right" required>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <a href="/company-define-process" class="btn btn-primary">Save -> Draw</a>
+                        <button type="submit" class="btn btn-default">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
